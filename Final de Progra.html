@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexFlix - Streaming de Películas y Series</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Efectos personalizados que no se pueden hacer con Tailwind */
+        .hero-gradient {
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.8) 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+        .card-hover:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+        .nav-scrolled {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        /* Animación del logo */
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        .logo-pulse {
+            animation: pulse 2s infinite ease-in-out;
+        }
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e50914;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-sans">
+    <!-- Barra de navegación -->
+    <nav id="navbar" class="fixed w-full flex justify-between items-center p-4 z-50 transition duration-500">
+        <div class="flex items-center">
+            <div class="logo-pulse">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 12L5 5V19L19 12Z" fill="#E50914"/>
+                </svg>
+            </div>
+            <span class="ml-2 text-2xl font-bold text-red-600">NEXFLIX</span>
+        </div>
+        <div class="hidden md:flex space-x-6">
+            <a href="#" class="hover:text-gray-300">Inicio</a>
+            <a href="#" class="hover:text-gray-300">Series</a>
+            <a href="#" class="hover:text-gray-300">Películas</a>
+            <a href="#" class="hover:text-gray-300">Novedades</a>
+            <a href="#" class="hover:text-gray-300">Mi lista</a>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="relative">
+                <input type="text" placeholder="Buscar..." class="bg-black bg-opacity-70 px-4 py-1 rounded text-white border border-red-600 hidden md:block">
+                <button class="md:hidden text-2xl"><i class="fas fa-search"></i></button>
+            </div>
+              <div class="relative group">
+                <div class="w-8 h-8 rounded overflow-hidden cursor-pointer hover:opacity-80 transition duration-200">
+                    <img src="https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-2fg93funipvqfs9i.jpg" alt="Perfil" class="w-full h-full object-cover">
+                </div>
+                <div class="absolute hidden group-hover:block right-0 mt-2 w-48 bg-black bg-opacity-90 rounded shadow-lg z-50">
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-800">Mi perfil</a>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-800">Configuración</a>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-800">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center">
+        <!-- Video de fondo solo para desktop -->
+        <video autoplay muted loop class="hidden md:block w-full h-full object-cover absolute top-0 left-0 z-0">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4" type="video/mp4">
+        </video>
+		<!-- Imagen de fondo para móviles -->
+		<div class="md:hidden absolute w-full h-full bg-[url('https://ca-times.brightspotcdn.com/dims4/default/c708c04/2147483647/strip/true/crop/3167x2000+0+0/resize/1200x758!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F91%2Fb2%2Fd435345b4a44b49ac1191f05e8d4%2Fla-ca-muppet-show-disney-plus-hensonv2.jpg')] bg-cover bg-center z-0"></div>
+        <div class="hero-gradient absolute w-full h-full z-25"></div>
+        <div class="relative z-175 px-4 md:px-16 w-full max-w-4xl text-center fade-in">
+            <div class="relative inline-block">
+                <div class="absolute inset-0 bg-[url('https://image.demorgen.be/200092759/width/2480/the-muppets-van-wie-kermit-de-kikker-en-miss-piggy-de-meest')] bg-cover bg-center filter blur-none opacity -100 -z-50 rounded-lg" style="width: 1100%; height: 3250%; left: -500%; top: -1400%;"></div
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">The Muppet Show</h1>
+			</div>	
+            <div class="flex justify-center space-x-4 mb-6">
+                <span class="text-green-500 font-semibold">88% Match</span>
+                <span>1974</span>
+                <span class="border px-2">TV-14</span>
+                <span>5 Temporadas</span>
+            </div>
+            <p class="text-lg md:text-xl mb-8">La Rana René y Miss Piggy presentan un espectáculo en el que participan como invitados distintas figuras y personalidades.</p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
+                <button class="bg-white text-black px-6 py-2 rounded font-semibold flex items-center justify-center space-x-2">
+                    <i class="fas fa-play"></i>
+                    <span>Reproducir</span>
+                </button>
+                <button class="bg-gray-600 bg-opacity-70 px-6 py-2 rounded font-semibold flex items-center justify-center space-x-2">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Más información</span>
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- Contenido principal -->
+    <main class="relative z-30 mt-8 pb-20 bg-gradient-to-b from-black via-black to-gray-900">
+        <!-- Carrusel 1 -->
+        <section class="mb-12 px-4 md:px-8">
+            <h2 class="text-xl md:text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2 text-red-500"><i class="fas fa-fire"></i></span>
+                Populares en Nexflix
+            </h2>
+            <div class="relative">
+                <div id="carousel1" class="flex overflow-x-auto space-x-4 pb-4 scroll-smooth scrollbar-hide">
+                    <!-- Películas generadas por JS -->
+                </div>
+                <button onclick="scrollCarousel('carousel1', -300)" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 text-white h-16 w-8 rounded-r-full flex items-center justify-center z-20 hover:bg-opacity-80 transition duration-200">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button onclick="scrollCarousel('carousel1', 300)" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 text-white h-16 w-8 rounded-l-full flex items-center justify-center z-20 hover:bg-opacity-80 transition duration-200">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Carrusel 2 -->
+        <section class="mb-12 px-4 md:px-8">
+            <h2 class="text-xl md:text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2 text-red-500"><i class="fas fa-star"></i></span>
+                Series originales
+            </h2>
+            <div class="relative">
+                <div id="carousel2" class="flex overflow-x-auto space-x-4 pb-4 scroll-smooth scrollbar-hide">
+                    <!-- Películas generadas por JS -->
+                </div>
+                <button onclick="scrollCarousel('carousel2', -300)" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 text-white h-16 w-8 rounded-r-full flex items-center justify-center z-20">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button onclick="scrollCarousel('carousel2', 300)" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 text-white h-16 w-8 rounded-l-full flex items-center justify-center z-20">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+		
+        <!-- Carrusel 3 -->
+        <section class="mb-12 px-4 md:px-8">
+            <h2 class="text-xl md:text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2 text-red-500"><i class="fas fa-chart-line"></i></span>
+                Tendencias esta semana
+            </h2>
+            <div class="relative">
+                <div id="carousel3" class="flex overflow-x-auto space-x-4 pb-4 scroll-smooth scrollbar-hide">
+                    <!-- Películas generadas por JS -->
+                </div>
+                <button onclick="scrollCarousel('carousel3', -300)" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 text-white h-16 w-8 rounded-r-full flex items-center justify-center z-20 hover:bg-opacity-80 transition duration-200">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button onclick="scrollCarousel('carousel3', 300)" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 text-white h-16 w-8 rounded-l-full flex items-center justify-center z-20 hover:bg-opacity-80 transition duration-200">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Carrusel 4 -->
+        <section class="mb-12 px-4 md:px-8">
+            <h2 class="text-xl md:text-2xl font-bold mb-4 flex items-center">
+                <span class="mr-2 text-red-500"><i class="fas fa-trophy"></i></span>
+                Oscar 2024
+            </h2>
+            <div class="relative">
+                <div id="carousel4" class="flex overflow-x-auto space-x-4 pb-4 scroll-smooth scrollbar-hide">
+                    <!-- Películas generadas por JS -->
+                </div>
+                <button onclick="scrollCarousel('carousel4', -300)" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 text-white h-16 w-8 rounded-r-full flex items-center justify-center z-20 hover:bg-opacity-80 transition duration-200">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button onclick="scrollCarousel('carousel4', 300)" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-60 text-white h-16 w-8 rounded-l-full flex items-center justify-center z-20 hover:bg-opacity-80 transition duration-200">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+		
+    <!-- Footer -->
+    <footer class="bg-black text-gray-500 py-12 px-4 md:px-16">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex mb-8">
+                <div class="logo-pulse">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 12L5 5V19L19 12Z" fill="#E50914"/>
+                    </svg>
+                </div>
+                <span class="ml-2 text-2xl font-bold text-red-600">NEXFLIX</span>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-gray-400 mb-4">Información</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Centro de ayuda</a></li>
+                        <li><a href="#" class="hover:text-white">Información corporativa</a></li>
+                        <li><a href="#" class="hover:text-white">Términos de uso</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-gray-400 mb-4">Comunidad</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Envío de sugerencias</a></li>
+                        <li><a href="#" class="hover:text-white">Foro</a></li>
+                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-gray-400 mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Privacidad</a></li>
+                        <li><a href="#" class="hover:text-white">Preferencias de cookies</a></li>
+                        <li><a href="#" class="hover:text-white">Test de velocidad</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-gray-400 mb-4">Redes sociales</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-2xl hover:text-white"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-2xl hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-2xl hover:text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <p class="text-sm">© 2025 Nexflix, Inc. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Datos de películas (simulados)
+        const movies = [
+            { title: "La La Land", year: "2016", rating: "80%", image: "https://upload.wikimedia.org/wikipedia/en/a/ab/La_La_Land_%28film%29.png" },
+            { title: "Mamma Mia!", year: "2008", rating: "64%", image: "https://m.media-amazon.com/images/M/MV5BYzU2YjAxMDgtYzFlZi00NTljLTk5YmYtNTQ0ZjUwNjdmZDJlXkEyXkFqcGc@._V1_.jpg" },
+            { title: "The Greatest Showman", year: "2017", rating: "76%", image: "https://m.media-amazon.com/images/M/MV5BMjI1NDYzNzY2Ml5BMl5BanBnXkFtZTgwODQwODczNTM@._V1_.jpg" },
+            { title: "Chicago", year: "2002", rating: "72%", image: "https://upload.wikimedia.org/wikipedia/en/f/f6/Chicago_%282002_film%29.png" },
+            { title: "Les Misérables", year: "2012", rating: "76%", image: "https://m.media-amazon.com/images/S/pv-target-images/65a79b784f29d137807757cbecb3376fd21641df695ab227bf2b99ba7d1452d2.jpg" },
+            { title: "Sing Street", year: "2016", rating: "79%", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxb9SY8d_hh5o5YCOw6e1mWpQRgcjLF1jRlA&s" },
+            { title: "Bohemian Rhapsody ", year: "2018", rating: "80%", image: "https://upload.wikimedia.org/wikipedia/en/2/2e/Bohemian_Rhapsody_poster.png" },
+            { title: "Rocketman", year: "2019", rating: "75%", image: "https://m.media-amazon.com/images/M/MV5BMTMxODlkMzMtMTE0MC00NWYzLWJkYTUtMmJkZTEwYjM4YmU4XkEyXkFqcGc@._V1_.jpg" },
+            { title: "A Star in Born", year: "2018", rating: "76%", image: "https://m.media-amazon.com/images/M/MV5BNTgwNGU2ZDktYzI0Ni00ZGM2LTg3MWItYzlhZGMyNDk0NjdhXkEyXkFqcGc@._V1_.jpg" },
+            { title: "Hairspary", year: "2007", rating: "67%", image: "https://m.media-amazon.com/images/S/pv-target-images/472d19dcecc8776b558058bd136b408ef9ad69586db81bfd25fe7e913a83ea49.jpg" },
+            { title: "The Sound of Music", year: "1965", rating: "80%", image: "https://lumiere-a.akamaihd.net/v1/images/soundofmusic_2_d860d47a.jpeg?region=0%2C0%2C584%2C876" },
+            { title: "Pitch Perfect", year: "2012", rating: "71%", image: "https://static.wikia.nocookie.net/pitch-perfect/images/2/29/Pitch_Perfect.jpg/revision/latest?cb=20140409081643" },
+			{ title: "Coco", year: "2017", rating: "84%", image: "https://lumiere-a.akamaihd.net/v1/images/p_coco_19736_fd5fa537.jpeg" },
+			{ title: "West Side Story", year: "1961", rating: "76%", image: "https://m.media-amazon.com/images/M/MV5BOWZkYzY2OGUtOGU4Ni00NmI0LTg2ZjAtZDA5OWE0YTNiZWRiXkEyXkFqcGc@._V1_.jpg" },
+			{ title: "Fame", year: "1980", rating: "67%", image: "https://m.media-amazon.com/images/I/81eL68PykNL._UF894,1000_QL80_.jpg" },
+        ];
+
+        const series = [
+            { title: "Glee", year: "2009-2015", rating: "67%", image: "https://m.media-amazon.com/images/M/MV5BMjUwYWRkMDItYTNkNy00OWQ0LWJhYTQtNzI3MWFmMmI3ZDQ5XkEyXkFqcGc@._V1_.jpg" },
+            { title: "Zoey's Extraordinary Playlist", year: "2020-2021", rating: "76%", image: "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p16935761_b_v13_aa.jpg" },
+            { title: "Smash", year: "2012-2013", rating: "70%", image: "https://es.web.img3.acsta.net/pictures/14/03/24/12/36/549841.jpg" },
+            { title: "The Get Down", year: "2016", rating: "80%", image: "https://m.media-amazon.com/images/M/MV5BMjE5Mzg0NzU3OF5BMl5BanBnXkFtZTgwNDg1ODg2MTI@._V1_.jpg" },
+            { title: "High School Musical: The Musical: The Series", year: "2019-Presente", rating: "70%", image: "https://static.wikia.nocookie.net/doblaje/images/5/51/HSM_Serie_Poster.png/revision/latest?cb=20200918171941&path-prefix=es" },
+            { title: "Crazy Ex-Girlfriend", year: "2015-2019", rating: "78%", image: "https://m.media-amazon.com/images/M/MV5BMjVjM2Y3YzctYzQwMi00OTY2LWEyMjMtODdkZmZiMWQxM2M4XkEyXkFqcGc@._V1_.jpg" },
+            { title: "Nashville", year: "2012-2018", rating: "77%", image: "https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p9259347_b_v8_aq.jpg" },
+            { title: "Empire", year: "2015-2020", rating: "73%", image: "https://m.media-amazon.com/images/M/MV5BNDQ4YTU4OWEtY2U0Mi00ZGQwLWIyYTMtZjQwMDkzYjUwOWNmXkEyXkFqcGc@._V1_.jpg" },
+            { title: "Julie and the Phantoms", year: "2020", rating: "82%", image: "https://cdn.kobo.com/book-images/4939d489-ebe6-44d0-8c9c-b16329f62d3e/1200/1200/False/julie-and-the-phantoms-le-roman-de-la-serie-netflix.jpg" },
+			{ title: "Soundtrack", year: "2019", rating: "69%", image: "https://m.media-amazon.com/images/M/MV5BZWUxY2IzOTEtMDVjZi00YTQzLWI1NjctYjFlZmE1YzgwNmUyXkEyXkFqcGc@._V1_.jpg" },
+			{ title: "Freaky Friday: The Musical", year: "2016", rating: "64%", image: "https://pbs.twimg.com/media/FmZOrUMWQAIZMqE.jpg:large" },
+			{ title: "The Voice", year: "2011-Presente", rating: "64%", image: "https://static.wikia.nocookie.net/thevoice/images/c/c0/TheVoice.png/revision/latest?cb=20130328200310" },
+			{ title: "American Idol", year: "2002-Presente", rating: "65%", image: "https://image.tmdb.org/t/p/original/7kvTVGyTlbmRJ8nX3Y7uXc3IBmP.jpg" },
+			{ title: "Sing On!", year: "2020-Presente", rating: "65%", image: "https://m.media-amazon.com/images/M/MV5BZWI3Y2RiMmMtMmU1OC00MjMxLTg2OTQtNjc2OGE4ODhhMjI2XkEyXkFqcGc@._V1_.jpg" },
+			{ title: "The Muppet Show", year: "1976-1981", rating: "87%", image: "https://upload.wikimedia.org/wikipedia/en/6/63/Muppets_cast.jpg" },
+        ];
+
+        // Función para generar tarjetas de películas/series
+        function generateCards(items, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'flex-none w-48 md:w-56 h-72 md:h-80 bg-gray-800 rounded overflow-hidden relative card-hover group';
+                card.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition duration-300 flex flex-col justify-between p-4 opacity-0 group-hover:opacity-100">
+                        <span class="text-green-500 font-bold">${item.rating}</span>
+                        <div>
+                            <h3 class="text-lg font-bold">${item.title}</h3>
+                            <p class="text-sm">${item.year}</p>
+                            <div class="flex mt-2 space-x-2">
+                                <button class="bg-white text-black p-1 rounded-full">
+                                    <i class="fas fa-play text-xs"></i>
+                                </button>
+                                <button class="border border-white p-1 rounded-full">
+                                    <i class="fas fa-plus text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Función para desplazar los carruseles
+        function scrollCarousel(containerId, amount) {
+            const container = document.getElementById(containerId);
+            container.scrollBy({ left: amount, behavior: 'smooth' });
+        }
+
+        // Función para cambiar el fondo de la navbar al hacer scroll
+        function handleScroll() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        }
+
+        // Inicializar la página
+        window.onload = function() {
+            generateCards(movies, 'carousel1');
+            generateCards(series, 'carousel2');
+            generateCards([...movies, ...series].sort(() => 0.5 - Math.random()).slice(0, 10), 'carousel3');
+            generateCards(movies.slice().sort((a, b) => parseInt(b.rating) - parseInt(a.rating)).slice(0, 10), 'carousel4');
+            window.addEventListener('scroll', handleScroll);
+            handleScroll(); // Ejecutar al cargar para ver la posición actual
+        };
+    </script>
+</body>
+</html>
